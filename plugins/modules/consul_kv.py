@@ -162,7 +162,7 @@ def _kv_get(consul_module, key, recurse=False, dc=None):
 
 def _kv_put(consul_module, key, value, cas=None, acquire=None, release=None, flags=None, dc=None):
     params = {"cas": cas, "acquire": acquire, "release": release, "flags": flags, "dc": dc}
-    if isinstance(value, str):
+    if value is not None:
         value = value.encode("utf-8")
     return consul_module.put(("kv", _quote_key(key)), data=value, params=params) is True
 
